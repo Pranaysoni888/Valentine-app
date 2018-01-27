@@ -1,7 +1,9 @@
-package com.codepuran.grabby;
+package com.codepuran.grabby.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.codepuran.grabby.R;
 
 public class MainActivity extends AppCompatActivity {
 
