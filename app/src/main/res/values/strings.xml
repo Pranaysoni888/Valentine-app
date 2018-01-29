@@ -6,5 +6,20 @@
     <string name="label_developed_in_india">Developed in India</string>
 
     <!--layout/activity_main.xml-->
-    <string name="label_valentines_day">Valentine's Day</string>
+    <string name="label_valentines_day">Valentine\'s Day</string>
+
+    <!--Festival Activity-->
+
+    <string-array name="days">
+        <item>Rose Day</item>
+        <item>Propose Day</item>
+        <item>Chocolate Day</item>
+        <item>Teddy Day</item>
+        <item>Promise Day</item>
+        <item>Hug Day</item>
+        <item>Kiss Day</item>
+        <item>Valentine’s Day</item>
+    </string-array>
+
+
 </resources>
