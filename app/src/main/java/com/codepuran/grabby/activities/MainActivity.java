@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(v.getId() == R.id.layout_valentines || v.getId() == R.id.txt_valentine)
         {
-            startActivity(new Intent(this,FestivalActivity.class).putExtra(Constants.INTENT_FESTIVAL,"Valentine's Day"));
+            startActivity(new Intent(this,FestivalActivity.class).putExtra(Constants.INTENT_FESTIVAL,"Valentine's Week"));
         }
     }
 }

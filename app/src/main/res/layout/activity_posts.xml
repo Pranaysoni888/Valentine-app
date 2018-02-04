@@ -17,6 +17,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:dividerHeight="10dp"
+        android:scrollbars="none"
         android:divider="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
