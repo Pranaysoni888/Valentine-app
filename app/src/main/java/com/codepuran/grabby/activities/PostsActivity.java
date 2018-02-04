@@ -5,12 +5,14 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.codepuran.grabby.Constants;
+import com.codepuran.grabby.GrabbyUtils;
 import com.codepuran.grabby.R;
 import com.codepuran.grabby.Request;
 import com.codepuran.grabby.adapters.PostsAdapter;
@@ -44,7 +46,7 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         selectedDay = getIntent().getIntExtra(Constants.INTENT_DAYS,0);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait");
+        progressDialog.setMessage(getString(R.string.progress_dialog_message));
 
         gson = new GsonBuilder().create();
 
@@ -61,6 +63,7 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
         setSupportActionBar(toolbar);
         if(toolbar != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             TextView textView = (TextView) toolbar.findViewById(R.id.txt_toolbar_header);
             textView.setText(daysList.get(selectedDay));
             Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/bulletto_killa_regular.ttf");
@@ -69,9 +72,14 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
 
         listViewTextPosts = (ListView) findViewById(R.id.listview_text_posts);
 
-        if(progressDialog != null) {
-            progressDialog.show();
-            Request.makeStringRequest(Constants.MAIN_URL + String.valueOf(selectedDay + 1), this);
+        if(GrabbyUtils.isNetworkConnected(PostsActivity.this)) {
+            if (progressDialog != null) {
+                progressDialog.show();
+                Request.makeStringRequest(Constants.MAIN_URL + String.valueOf(selectedDay + 1), this);
+            }
+        }
+        else {
+            Toast.makeText(this,getString(R.string.no_internet_connection),Toast.LENGTH_LONG).show();
         }
 
     }
@@ -99,5 +107,22 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
 
         Toast.makeText(this,error.toString(),Toast.LENGTH_LONG).show();
 
+        if(progressDialog != null && progressDialog.isShowing())
+        {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

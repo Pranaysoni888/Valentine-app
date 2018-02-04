@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -45,6 +46,7 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
         setSupportActionBar(toolbar);
         if(toolbar != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             TextView textView = (TextView) toolbar.findViewById(R.id.txt_toolbar_header);
             textView.setText(getIntent().getStringExtra(Constants.INTENT_FESTIVAL));
             Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/bulletto_killa_regular.ttf");
@@ -63,5 +65,18 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
         Intent intent = new Intent(FestivalActivity.this,PostsActivity.class);
         intent.putExtra(Constants.INTENT_DAYS,position);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

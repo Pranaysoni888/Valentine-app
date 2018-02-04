@@ -2,11 +2,14 @@
     <string name="app_name">Grabby</string>
 
 
+    <string name="no_internet_connection">Please check your Internet connection</string>
+    <string name="progress_dialog_message">Please wait&#8230;</string>
+
     <!--layout/activity_splash.xml-->
     <string name="label_developed_in_india">Developed in India</string>
 
     <!--layout/activity_main.xml-->
-    <string name="label_valentines_day">Valentine\'s Day</string>
+    <string name="label_valentines_day">Valentine\'s Week</string>
 
     <!--Festival Activity-->
 
