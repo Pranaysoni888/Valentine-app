@@ -13,8 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepuran.grabby.Constants;
+import com.codepuran.grabby.GrabbyUtils;
 import com.codepuran.grabby.R;
 import com.codepuran.grabby.adapters.DaysAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +28,7 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
     private ListView listViewDays;
     private DaysAdapter daysAdapter;
     private ArrayList<String> daysList;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         listViewDays = (ListView) findViewById(R.id.listview_days);
+        mAdView = (AdView) findViewById(R.id.adView);
         daysList = new ArrayList<>();
         daysList.add("Rose Day");
         daysList.add("Propose Day");
@@ -53,6 +58,10 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
             textView.setTypeface(typeface);
         }
 
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
+
         daysAdapter = new DaysAdapter(this, daysList);
         listViewDays.setAdapter(daysAdapter);
 
@@ -64,7 +73,13 @@ public class FestivalActivity extends AppCompatActivity implements AdapterView.O
 
         Intent intent = new Intent(FestivalActivity.this,PostsActivity.class);
         intent.putExtra(Constants.INTENT_DAYS,position);
-        startActivity(intent);
+
+        if(GrabbyUtils.isNetworkConnected(this)) {
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this,getString(R.string.no_internet_connection),Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Grabby</string>
+    <string name="ad_mob_id">ca-app-pub-7179351033607124~2618303959</string>
+    <string name="ad_mob_unit">ca-app-pub-7179351033607124/4494847626</string>
+    <string name="ad_mob_unit_test">ca-app-pub-3940256099942544/6300978111</string>
 
 
     <string name="no_internet_connection">Please check your Internet connection</string>
@@ -24,5 +27,6 @@
         <item>Valentine’s Day</item>
     </string-array>
 
+    <string name="share_using">Share using</string>
 
 </resources>

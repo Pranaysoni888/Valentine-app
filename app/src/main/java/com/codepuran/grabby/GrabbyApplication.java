@@ -6,6 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * Created by parth on 1/28/2018.
@@ -20,6 +21,7 @@ public class GrabbyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         grabbyApplicationInstance = this;
+        MobileAds.initialize(this,getString(R.string.ad_mob_id));
     }
 
 

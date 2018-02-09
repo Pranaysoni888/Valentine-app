@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "278420026239",
+    "firebase_url": "https://grabby-94096.firebaseio.com",
+    "project_id": "grabby-94096",
+    "storage_bucket": "grabby-94096.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278420026239:android:7a29ac3d15619543",
+        "android_client_info": {
+          "package_name": "com.codepuran.grabby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278420026239-jbgblg89pqlg3rkrd7vd374fu7c5lt21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnEuMvjzSH4WR4uZyD1t9YxDC2DG_cwws"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

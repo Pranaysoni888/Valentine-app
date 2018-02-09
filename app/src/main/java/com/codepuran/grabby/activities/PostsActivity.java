@@ -18,6 +18,8 @@ import com.codepuran.grabby.Request;
 import com.codepuran.grabby.adapters.PostsAdapter;
 import com.codepuran.grabby.dto.TextDaysDTO;
 import com.codepuran.grabby.listeners.ResponseListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +39,7 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
     private ProgressDialog progressDialog;
     private Gson gson;
     ArrayList<TextDaysDTO> textDaysDTOs;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
         setContentView(R.layout.activity_posts);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mAdView = (AdView) findViewById(R.id.adView);
         selectedDay = getIntent().getIntExtra(Constants.INTENT_DAYS,0);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.progress_dialog_message));
@@ -70,6 +74,10 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
             textView.setTypeface(typeface);
         }
 
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
+
         listViewTextPosts = (ListView) findViewById(R.id.listview_text_posts);
 
         if(GrabbyUtils.isNetworkConnected(PostsActivity.this)) {
@@ -89,10 +97,16 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
 
         if(response != null)
         {
-            Type collectionType = new TypeToken<ArrayList<TextDaysDTO>>() {}.getType();
-            textDaysDTOs = gson.fromJson(response,collectionType);
-            PostsAdapter postsAdapter = new PostsAdapter(this,textDaysDTOs);
-            listViewTextPosts.setAdapter(postsAdapter);
+            try {
+                Type collectionType = new TypeToken<ArrayList<TextDaysDTO>>() {}.getType();
+                textDaysDTOs = gson.fromJson(response, collectionType);
+                PostsAdapter postsAdapter = new PostsAdapter(this, textDaysDTOs);
+                listViewTextPosts.setAdapter(postsAdapter);
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "Sorry! something went wrong..", Toast.LENGTH_SHORT).show();
+            }
 
             if(progressDialog != null && progressDialog.isShowing())
             {
@@ -105,7 +119,7 @@ public class PostsActivity extends AppCompatActivity implements ResponseListener
     @Override
     public void notifyError(VolleyError error, String url) {
 
-        Toast.makeText(this,error.toString(),Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Sorry! Something went wrong..",Toast.LENGTH_LONG).show();
 
         if(progressDialog != null && progressDialog.isShowing())
         {
